@@ -1,14 +1,13 @@
 import React from "react"
 import Footer from "./footer"
-// import Sidenav from "./sidenav"
 import Header from "./header"
 
 export default function Layout({ children }) {
   return (
-    <div>
+    <div className="flex flex-col flex-wrap">
       <Header />
-      <p className="mx-32 max-w-md">{children}</p>
-      <Footer />
+      {children}
+      <Footer className="inset-x-0 bottom-0" />
     </div>
   )
 }

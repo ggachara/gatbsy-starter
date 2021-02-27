@@ -8,13 +8,14 @@ module.exports = {
   /* Your site config here */
   siteMetadata: {
     title: `ReamsPro Manual`,
+    description: `Real Estate Management System`,
   },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
+        name: `pages`,
+        path: `${__dirname}/src/pages/`,
       },
     },
     `gatsby-transformer-remark`,
