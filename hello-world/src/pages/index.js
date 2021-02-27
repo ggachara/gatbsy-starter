@@ -5,26 +5,35 @@ import Layout from "../components/layout"
 export default function Home({ data }) {
   return (
     <Layout>
-      <div className="flex-grow px-4 mx-6">
-        <Link to="/about">About</Link>
-        <p>New Model Out there</p>
-        <img
-          className="h-auto"
-          src="https://source.unsplash.com/random/400x200"
-          alt=""
-        />
-        <h4 className="text-gray">{data.allMarkdownRemark.totalCount} Posts</h4>
-        {data.allMarkdownRemark.edges.map(({ node }) => (
-          <div key={node.id}>
-            <h3 className="underline text-xl text-blue-500 hover:text-2xl">
-              {node.frontmatter.title}{" "}
-              <span className="text-black text-lg">
-                — {node.frontmatter.date}
-              </span>
-            </h3>
-            {/* <p className="mx-6">{node.excerpt}</p> */}
-          </div>
-        ))}
+      <div className="text-center mt-2">
+        <Link className="text-center text-3xl font-semibold" to="/about">
+          ReamsPro Manual Home
+        </Link>
+        <h3 className="text-gray text-lg">
+          Your Guide to grasping this barakoa
+        </h3>
+        <h4 className="text-gray">
+          {data.allMarkdownRemark.totalCount} Articles
+        </h4>
+        <div className="grid grid-cols-4 gap-2 my-6 mx-2">
+          {data.allMarkdownRemark.edges.map(({ node }) => (
+            <Link to={node.fields.slug}>
+              <div
+                className="border border-1 border-gray-300 shadow-md border-opacity-50 h-28 text-center rounded-md pt-3"
+                key={node.id}
+              >
+                <div className="inline-block">
+                  <h3 className=" text-xl text-gray-700 font-semibold hover:text-2xl">
+                    {node.frontmatter.title}{" "}
+                  </h3>
+                  <h4 className=" text-base text-gray-500 font-medium pt-1 hover:text-sm">
+                    {node.frontmatter.description}{" "}
+                  </h4>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </Layout>
   )
@@ -39,7 +48,11 @@ export const query = graphql`
           id
           frontmatter {
             title
+            description
             date(formatString: "DD MMMM, YYYY")
+          }
+          fields {
+            slug
           }
           excerpt
         }
